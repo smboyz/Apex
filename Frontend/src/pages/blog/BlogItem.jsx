@@ -9,7 +9,7 @@ const BlogItem = ({ imageUrl, title, description, date, id }) => {
             </NavLink>
             <div className='p-4 flex flex-col items-start gap-3'>
                 <NavLink to={`/Blog/${id}`}><h3 className='sm:text-2xl text-xl font-semibold'>{title}</h3></NavLink>
-                <p className='text-gray-700 sm:text-base text-sm'>{description.substring(0, 150)}...</p>
+                <p dangerouslySetInnerHTML={{ __html: description.substring(0, 150) }} className='text-gray-700 sm:text-base text-sm'></p>
             </div>
             <div className='px-4 py-2 border-t text-gray-700'>
                 <p className='text-gray-700'>{date}</p>

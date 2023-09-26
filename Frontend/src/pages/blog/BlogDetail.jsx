@@ -1,31 +1,64 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import BlogData from './BlogData';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const BlogDetail = () => {
     const { id } = useParams();
     const blogId = parseInt(id);
-    const data = BlogData.find(blog => blog.id === blogId);
+    // const data = BlogData.find(blog => blog.id === blogId);
+    const [blogs, setBlogs] = useState([]);
+    const [blogs_1, setBlogs_1] = useState([]);
+
+    const BlogsData = async () => {
+        try {
+            const response = await axios.get(
+                "http://127.0.0.1:8000/api/navigations/"
+            );
+            // Filter the response data by status and page_type
+            if (response.data) {
+                const blogsData = response.data.filter(
+                    (item) => item.status === "Publish" && item.page_type === "Blog"
+                );
+                setBlogs(blogsData[0]); // Assuming you want to slice the filtered data
+            }
+
+            if (response.data) {
+                const blogs_1Data = response.data.filter(
+                    (item) => item.status === "Publish" && item.page_type === "Blog_1"
+                );
+                setBlogs_1(blogs_1Data.find((item) => item.id === blogId)); // Assuming you want to slice the filtered data
+            }
+
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    };
+
+    useEffect(() => {
+        // Axios GET request to fetch data
+        BlogsData();
+    }, []);
 
     return (
         <>
             <section className='md:py-40 py-28 relative'>
-                <img className='absolute inset-0 w-full h-full object-cover' src="/src/assets/images/background.webp" alt="background" />
+                <img className='absolute inset-0 w-full h-full object-cover' src={blogs.slider_image} alt="background" />
                 <div className='absolute inset-0 w-full h-full bg-black opacity-50'></div>
                 <div className="relative z-10 container flex justify-center items-center text-white">
-                    <h1 className='lg:text-5xl md:text-4xl sm:text-3xl text-2xl font-bold'>Blog Detail</h1>
+                    <h1 className='lg:text-5xl md:text-4xl sm:text-3xl text-2xl font-bold'>{blogs.title}</h1>
                 </div>
             </section>
             <section className='py-10'>
                 <div className="container flex flex-col items-start">
-                    <h2 className='lg:text-4xl sm:text-3xl text-2xl font-semibold'>{data.title}</h2>
-                    <p className='my-2 text-sm'>Published Date: {data.publishedData}</p>
+                    <h2 className='lg:text-4xl sm:text-3xl text-2xl font-semibold'>{blogs_1.name}</h2>
+                    <p className='my-2 text-sm'>Published Date: {blogs_1.date}</p>
                     <div className='flex lg:flex-row flex-col gap-4 items-start'>
                         <div className='lg:w-1/3 w-full'>
-                            <img className='w-full h-[300px] object-cover rounded-sm' src={data.imageUrl} alt={data.title} />
+                            <img className='w-full h-[300px] object-cover rounded-sm' src={blogs_1.bannerimage} alt={blogs_1.name} />
                         </div>
                         <div className='lg:w-2/3 w-full lg:mt-0 mt-5'>
-                            <p className='text-gray-700 sm:text-base text-sm'>{data.description}</p>
+                            <p className='text-gray-700 sm:text-base text-sm' dangerouslySetInnerHTML={{ __html: blogs_1.short_desc }}></p>
                             <div className='w-full mt-5 p-4 bg-gray-200'>
                                 <h3 className='sm:text-2xl text-xl font-semibold mb-1'>Leave a comment</h3>
                                 <form className='flex flex-col items-center'>
