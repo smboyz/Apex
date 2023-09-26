@@ -1,3 +1,4 @@
+from tokenize import Comment
 from .serializers import *
 from rest_framework import viewsets
 from rest_framework.views import APIView
@@ -120,6 +121,7 @@ class contactUS(APIView):
           # Example: Save the form data to the ContactUS model
         contact = ContactUS.objects.create(
             full_name=data.get('full_name'),
+            mobileno=data.get('mobileno'),
             email=data.get('email'),
             subject=data.get('subject'),
             message=data.get('message')
@@ -138,7 +140,50 @@ class contactUS(APIView):
         serializer = ContactSerializer(snippet)
         return Response(serializer.data)
 
-        
+
+class CommentViewSet(viewsets.ModelViewSet):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        # print(request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': 'Comment form data received'}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+   
+class contactUS(APIView):
+    """
+    Retrieve, update or delete a snippet instance.
+
+    """
+    def post(self,request,format=None):
+        data = request.data
+          # Example: Save the form data to the ContactUS model
+        comment = Comment.objects.create(
+            full_name=data.get('full_name'),
+            mobileno=data.get('mobileno'),
+            email=data.get('email'),
+            message=data.get('message')
+        )
+        # Return a response
+        return Response({'message': 'Comment form data received'}, status=status.HTTP_201_CREATED)
+    
+    def get_object(self, pk):
+        try:
+            return Comment.objects.get(pk=pk)
+        except Comment.DoesNotExists:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        serializer = CommentSerializer(snippet)
+        return Response(serializer.data)
+
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer

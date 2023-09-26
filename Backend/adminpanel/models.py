@@ -26,8 +26,18 @@ class GlobalSettings(models.Model):
 
 class ContactUS(models.Model):
     name = models.CharField(max_length=50)
+    mobileno = models.CharField(max_length=50,null=True)
     email = models.CharField(max_length=50)
     subject = models.CharField(max_length=50)
+    message = models.TextField(null=True)
+    
+    def __str__(self):
+        return self.name
+    
+class Comment(models.Model):
+    name = models.CharField(max_length=50)
+    mobileno = models.CharField(max_length=50,null=True)
+    email = models.CharField(max_length=50)
     message = models.TextField(null=True)
     
     def __str__(self):
@@ -38,12 +48,12 @@ class ContactUS(models.Model):
 class Navigation(models.Model):
     PAGE_TYPE = (
         ('Home', 'Home'),('Slider','Slider'),('Home/About', 'Home/About'),('Features', 'Features'),
-        ('Features_1', 'Features_1'),('Home/Video', 'Home/Video'),
+        ('Features_1', 'Features_1'),('Home/Video', 'Home/Video'),('Aboutus', 'Aboutus'),('Aboutus_1', 'Aboutus_1'),
         ('Achievements', 'Achievements'),('Achievements_1', 'Achievements_1'),('Testimonials', 'Testimonials'),
         ('Blog','Blog'),('Services', 'Services'),('Vision','Vision'),('Mission','Mission'),
         ('Objectives','Objectives'),('Our Strength','Our Strength'),('Research & Development','Research & Development'),
         ('Video_Gallery', 'Video_Gallery'),('Gallery', 'Gallery'),('Image_Gallery', 'Image_Gallery'),
-        ('Contact', 'Contact'),('Group', 'Group'),
+        ('Contact', 'Contact'),('Group', 'Group'),('Video', 'Video'),('Blog_1','Blog_1'),
     )
 
     STATUS = (
@@ -66,6 +76,8 @@ class Navigation(models.Model):
     Parent = models.ForeignKey('self', related_name="childs", on_delete=models.CASCADE, null=True, blank=True)
     brochure = models.FileField(upload_to="brochure/",null=True)
     date = models.DateField(auto_now_add=True, null=True)
+    image = models.ImageField(upload_to="about/",null=True)
+    video = models.FileField(upload_to="video/%y", null=True)
 
     def __str__(self):
         return self.name

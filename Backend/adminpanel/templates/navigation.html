@@ -180,11 +180,11 @@
                                                                     <option value="Video_Gallery">Video_Gallery</option>
                                                                     <option value="Image_Gallery">Image_Gallery</option>
                                                                     <option value="Contact">Contact</option>
+                                                                    <option value="Aboutus">Aboutus</option>
+                                                                    <option value="Aboutus_1">Aboutus_1</option>
+                                                                    <option value="Video">Video</option>
+                                                                    <option value="Blog_1">Blog_1</option>
                                                                     {% comment %} <option value="Registration">Registration</option>
-                                                                    <option value="Registration_1">Registration_1</option>
-                                                                    <option value="UNSKILLED">UNSKILLED</option>
-                                                                    <option value="SKILLED">SKILLED</option>
-                                                                    <option value="SEMISKILLED">SEMISKILLED</option>
                                                                     <option value="SKILLED 1">SKILLED 1</option>
                                                                     <option value="SKILLED 2">SKILLED 2</option>
                                                                     <option value="SKILLED 3">SKILLED 3</option>
@@ -259,7 +259,7 @@
                                                                 <label for="short_desc">Short Description</label>
                                                             </div>
                                                             <div class="col-12">
-                                                                <textarea id="summernote" name="short_desc"></textarea>
+                                                                <textarea class="summernote" id="summernote" name="short_desc"></textarea>
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
@@ -267,7 +267,7 @@
                                                                 <label>Description</label>
                                                             </div>
                                                             <div class="col-12">
-                                                                <textarea name="desc"></textarea>
+                                                                <textarea class="summernote" id="summernote" name="desc"></textarea>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -328,6 +328,30 @@
                                                                 <input type="file" name="slider_image">
                                                                 {% if obj.slider_image %}
                                                                     <img src="{{ obj.slider_image.url }}" style="max-width: 50%; height: auto">
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 mt-5">
+                                                            <div class="col-12 p-2">
+                                                                <label>Image</label>
+                                                            </div>
+                                                            <div class="col-8 mt-5">
+                                                                <input type="file" name="image">
+                                                                {% if obj.image %}
+                                                                    <img src="{{ obj.image.url }}" style="max-width: 50%; height: auto" />
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 mt-5">
+                                                            <div class="col-12 p-2">
+                                                                <label for="video">Video</label>
+                                                            </div>
+                                                            <div class="col-8 mt-5">
+                                                                <input name="video" type="file" id="video">
+                                                                {% if obj.video %}
+                                                                    <video controls style="max-width: 50%; height: auto">
+                                                                        <source src="{{ obj.video.url }}" type="video/mp4">
+                                                                    </video>
                                                                 {% endif %}
                                                             </div>
                                                         </div>

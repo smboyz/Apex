@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .models import GlobalSettings, ContactUS, Navigation
+from .models import GlobalSettings, ContactUS, Navigation, Comment
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 
@@ -130,6 +130,22 @@ def delete_contact(request, pk):
 
     return redirect('contactus')
 
+def comment(request):
+    glob = GlobalSettings.objects.all()
+    con=Comment.objects.all()
+ 
+    return render(request, "comment.html",{'con':con, 'glob' : glob})
+
+@login_required(login_url=settings.LOGIN_URL)
+def delete_comment(request, pk):
+    con = get_object_or_404(Comment, pk=pk)
+
+    if request.method == "POST":
+        con.delete()
+        return redirect('comment')
+
+    return redirect('comment')
+
 @login_required(login_url=settings.LOGIN_URL)
 def main_navigation(request, parent_id=None):
     glob=GlobalSettings.objects.all()
@@ -162,9 +178,11 @@ def navigation_list(request, parent_id=None):
         meta_keyword = request.POST.get('meta_keyword')
         icon_image = request.POST.get('icon_image')
         slider_image = request.FILES.get('slider_image')
+        image = request.FILES.get('image')
         parent_id = request.POST.get('Parent')
         desc = request.POST.get('desc')
         date = request.POST.get('date')
+        video = request.FILES.get('video')
 
         if parent_id:
             parent_navigation = Navigation.objects.get(pk=parent_id)
@@ -185,6 +203,7 @@ def navigation_list(request, parent_id=None):
             desc=desc,
             icon_image=icon_image,
             date = date,
+            image = image,
             Parent=parent_navigation,  # Assign parent navigation object
         )
         # obj.Parent = Navigation.objects.filter(id=parent_id)
@@ -194,6 +213,10 @@ def navigation_list(request, parent_id=None):
             obj.bannerimage = bannerimage
         if slider_image:
             obj.slider_image = slider_image
+        if image:
+            obj.image = image
+        if video:
+            obj.video = video
         if brochure:
             obj.brochure = brochure
 
@@ -228,9 +251,11 @@ def update(request, pk):
         meta_keyword=request.POST.get('meta_keyword')
         icon_image=request.POST.get('icon_image')
         slider_image=request.FILES.get('slider_image')
+        image = request.FILES.get('image')
         brochure = request.FILES.get('brochure')
         parent_id = request.POST.get('Parent')
         date = request.POST.get('date')
+        video = request.FILES.get('video')
 
         if parent_id:
             parent_navigation = Navigation.objects.get(pk=parent_id)
@@ -259,6 +284,12 @@ def update(request, pk):
 
         if slider_image:
             data.slider_image = slider_image
+        
+        if image:
+            data.image = image
+        
+        if video:
+            data.video=video
         
         if brochure:
             data.brochure = brochure

@@ -237,22 +237,26 @@
                                                                     </option>
                                                                     <option value="Contact"
                                                                             {% if data.page_type == "Contact" %}selected="selected"{% endif %}>
-                                                                        Contacts
+                                                                        Contact
+                                                                    </option>
+                                                                    <option value="Aboutus"
+                                                                            {% if data.page_type == "Aboutus" %}selected="selected"{% endif %}>
+                                                                        Aboutus
+                                                                    </option>
+                                                                    <option value="Aboutus_1"
+                                                                            {% if data.page_type == "Aboutus_1" %}selected="selected"{% endif %}>
+                                                                        Aboutus_1
+                                                                    </option>
+                                                                    <option value="Video"
+                                                                            {% if data.page_type == "Video" %}selected="selected"{% endif %}>
+                                                                        Video
+                                                                    </option>
+                                                                    <option value="Blog_1"
+                                                                            {% if data.page_type == "Blog_1" %}selected="selected"{% endif %}>
+                                                                        Blog_1
                                                                     </option>
                                                                     {% comment %} <option value="UNSKILLED" {% if data.page_type == "UNSKILLED" %}selected="selected"{% endif %}>
                                                                         UNSKILLED
-                                                                    </option>
-                                                                    <option value="SKILLED" {% if data.page_type == "SKILLED" %}selected="selected"{% endif %}>
-                                                                        SKILLED
-                                                                    </option>
-                                                                    <option value="SEMISKILLED" {% if data.page_type == "SEMISKILLED" %}selected="selected"{% endif %}>
-                                                                        SEMISKILLED
-                                                                    </option>
-                                                                    <option value="SKILLED 1" {% if data.page_type == "SKILLED 1" %}selected="selected"{% endif %}>
-                                                                        SKILLED 1
-                                                                    </option>
-                                                                    <option value="SKILLED 2" {% if data.page_type == "SKILLED 2" %}selected="selected"{% endif %}>
-                                                                        SKILLED 2
                                                                     </option>
                                                                     <option value="SKILLED 3" {% if data.page_type == "SKILLED 3" %}selected="selected"{% endif %}>
                                                                         SKILLED 3
@@ -405,14 +409,14 @@
                                                                 <label>Short Description</label>
                                                             </div>
                                                             <div class="col-12">
-                                                                <textarea id="summernote" name="short_desc">{{ data.short_desc }}</textarea>
+                                                                <textarea class="summernote" id="summernote" name="short_desc">{{ data.short_desc }}</textarea>
                                                             </div>
                                                             <div class="col-12">
                                                                 <div class="col-12 p-2">
                                                                     <label>Description</label>
                                                                 </div>
                                                                 <div class="col-12">
-                                                                    <textarea name="desc">{{ data.desc }}</textarea>
+                                                                    <textarea class="summernote" id="summernote" name="desc">{{ data.desc }}</textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -476,6 +480,28 @@
                                                                              style="max-width: 50%;
                                                                                     height: auto">
                                                                     {% endif %}
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <div class="col-12 p-2 mt-5">
+                                                                    <label>Image</label>
+                                                                </div>
+                                                                <div class="col-8">
+                                                                    <input type="file" name="image" value="{{ data.image }}">
+                                                                    {% if data.image %}
+                                                                        <img src="{{ data.image.url }}" style="max-width: 50%; height: auto">
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6 mt-5">
+                                                                <div class="col-12 p-2">
+                                                                    <label for="video">Video</label>
+                                                                </div>
+                                                                <div class="col-8">
+                                                                    <input name="video" type="file" id="video">
+                                                                    <video controls style="max-width: 50%; height: auto">
+                                                                        {% if obj.video %}<source src="{{ obj.video.url }}" type="video/mp4">{% endif %}
+                                                                    </video>
                                                                 </div>
                                                             </div>
                                                             {% comment %} <div class="col-6 mt-5">

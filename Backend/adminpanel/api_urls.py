@@ -10,6 +10,7 @@ router.register(r'users',UserViewSet)
 router.register(r'globals', GlobalViewSet)
 router.register(r'navigations', NavigationViewSet)
 router.register(r'contacts',ContactViewSet)
+router.register(r'contacts',CommentViewSet)
 
 
 # Wire up our API using automatic URL routing.
@@ -20,6 +21,7 @@ urlpatterns = [
     # path('navigation/',Navigation.as_view(),name='navigation'),
     path('navigation/<int:pk>',Navigation.as_view(),name='navigation'),
     path('contactUs/<int:pk>',Navigation.as_view(),name='contactUs'),
+    path('comment/<int:pk>',Navigation.as_view(),name='comment'),
     path('api/', include(router.urls)),
     # path('glob/',globalSettings_list),
 ]
