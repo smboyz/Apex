@@ -9,6 +9,13 @@ const BlogDetail = () => {
     // const data = BlogData.find(blog => blog.id === blogId);
     const [blogs, setBlogs] = useState([]);
     const [blogs_1, setBlogs_1] = useState([]);
+    const [formData, setFormData] = useState({
+        name: "",
+        mobileno: "",
+        email: "",
+        message: "",
+    });
+    const [successMessage, setSuccessMessage] = useState("");
 
     const BlogsData = async () => {
         try {
@@ -32,6 +39,46 @@ const BlogDetail = () => {
 
         } catch (error) {
             console.error("Error fetching data:", error);
+        }
+    };
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post(
+                "http://127.0.0.1:8000/api/comments/",
+                formData
+            );
+
+            // Check if the response status is 201 Created (or another success status)
+            if (response.status === 201) {
+                // Show a success message to the user
+                setSuccessMessage("Submitted successfully!");
+
+                // Optionally, reset the form fields
+                setFormData({
+                    name: "",
+                    mobileno: "",
+                    email: "",
+                    message: "",
+                });
+            } else {
+                // Handle other status codes (e.g., 400 for validation errors)
+                console.error(
+                    "Server responded with an unexpected status code:",
+                    response.status
+                );
+            }
+        } catch (error) {
+            console.error("Error submitting form:", error);
         }
     };
 
@@ -61,13 +108,18 @@ const BlogDetail = () => {
                             <p className='text-gray-700 sm:text-base text-sm' dangerouslySetInnerHTML={{ __html: blogs_1.short_desc }}></p>
                             <div className='w-full mt-5 p-4 bg-gray-200'>
                                 <h3 className='sm:text-2xl text-xl font-semibold mb-1'>Leave a comment</h3>
-                                <form className='flex flex-col items-center'>
-                                    <div className='flex md:flex-row flex-col justify-between items-center gap-4 mb-4 w-full'>
-                                        <input className='px-2 py-1 border border-black focus:outline outline-none w-full rounded-sm' type="text" id='name' name='name' placeholder='Name' required />
-                                        <input className='px-2 py-1 border border-black focus:outline  w-full rounded-sm' type="tel" id='mobile' name='mobile' placeholder='Mobile No.' required />
-                                        <input className='px-2 py-1 border border-black focus:outline  w-full rounded-sm' type="email" id='email' name='email' placeholder='Email' required />
+                                {successMessage && (
+                                    <div className="success-message" style={{ color: "green" }}>
+                                        {successMessage}
                                     </div>
-                                    <textarea className='p-2 border border-black focus:outline outline-none w-full rounded-sm' type="text" id='message' name='message' rows='5' placeholder='Write your response' required />
+                                )}
+                                <form className='flex flex-col items-center' onSubmit={handleSubmit}>
+                                    <div className='flex md:flex-row flex-col justify-between items-center gap-4 mb-4 w-full'>
+                                        <input className='px-2 py-1 border border-black focus:outline outline-none w-full rounded-sm' type="text" id='name' name='name' placeholder='Name' value={formData.name} onChange={handleInputChange} required />
+                                        <input className='px-2 py-1 border border-black focus:outline  w-full rounded-sm' type="tel" id='mobile' name='mobileno' placeholder='Mobile No.' value={formData.mobileno} onChange={handleInputChange} required />
+                                        <input className='px-2 py-1 border border-black focus:outline  w-full rounded-sm' type="email" id='email' name='email' placeholder='Email' value={formData.email} onChange={handleInputChange} required />
+                                    </div>
+                                    <textarea className='p-2 border border-black focus:outline outline-none w-full rounded-sm' type="text" id='message' name='message' rows='5' placeholder='Write your response' value={formData.message} onChange={handleInputChange} required />
                                     <input className='bg-sky-600 text-white py-2 px-3 rounded border border-sky-600 transition-all duration-200 ease-linear hover:bg-white hover:text-gray-700 cursor-pointer mt-6' type="submit" value='Post Comment' />
                                 </form>
                             </div>

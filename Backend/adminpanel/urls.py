@@ -15,4 +15,6 @@ urlpatterns = [
     path("navigation/<int:parent_id>/", navigation_list, name="navigation"),
     path("update/<int:pk>/", update, name="update"),
     path("delete_nav/<int:pk>/", delete_nav, name="delete_nav"),
+    path("comment/", comment, name="comment"),
+    path("delete_comment/<int:pk>/", delete_comment, name="delete_comment"),
 ]

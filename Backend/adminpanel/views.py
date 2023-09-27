@@ -132,16 +132,16 @@ def delete_contact(request, pk):
 
 def comment(request):
     glob = GlobalSettings.objects.all()
-    con=Comment.objects.all()
+    com=Comment.objects.all()
  
-    return render(request, "comment.html",{'con':con, 'glob' : glob})
+    return render(request, "comment.html",{'com':com, 'glob' : glob})
 
 @login_required(login_url=settings.LOGIN_URL)
 def delete_comment(request, pk):
-    con = get_object_or_404(Comment, pk=pk)
+    com = get_object_or_404(Comment, pk=pk)
 
     if request.method == "POST":
-        con.delete()
+        com.delete()
         return redirect('comment')
 
     return redirect('comment')

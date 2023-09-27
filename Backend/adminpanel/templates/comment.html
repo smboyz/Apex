@@ -8,7 +8,7 @@
          navbar-scroll="true">
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
-          <h6 class="font-weight-bolder mb-0">CONTACT US</h6>
+          <h6 class="font-weight-bolder mb-0">Post Comment</h6>
         </nav>
       </div>
     </nav>
@@ -32,14 +32,14 @@
                       <th>Email</th>
                       <th>message</th>
                     </tr>
-                    {% for cons in con %}
+                    {% for cons in com %}
                       <tr>
                         <td>{{ cons.name }}</td>
                         <td>{{ cons.mobileno }}</td>
                         <td>{{ cons.email }}</td>
                         <td>{{ cons.message }}</td>
                         <td>
-                          <form method="POST" action="{% url 'delete' pk=cons.pk %}">
+                          <form method="POST" action="{% url 'delete_comment' pk=cons.pk %}">
                             {% csrf_token %}
                             <button type="button" class="btn-danger btn-sm" onclick="myFunction(event)">&#128465;</button>
                             <p class="confirmation-msg"></p>

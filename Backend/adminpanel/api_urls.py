@@ -10,7 +10,7 @@ router.register(r'users',UserViewSet)
 router.register(r'globals', GlobalViewSet)
 router.register(r'navigations', NavigationViewSet)
 router.register(r'contacts',ContactViewSet)
-router.register(r'contacts',CommentViewSet)
+router.register(r'comments',CommentViewSet)
 
 
 # Wire up our API using automatic URL routing.
