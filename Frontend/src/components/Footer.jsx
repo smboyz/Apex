@@ -51,16 +51,16 @@ const Footer = () => {
                             </div>
                             <div className='mt-3 flex items-center gap-2'>
 
-                                <a href="#" className='flex justify-center items-center h-[30px] w-[30px] border border-sky-600 bg-sky-600 text-white hover:h-[35px] hover:w-[35px] transition-all duration-100 ease-linear rounded-full'>
+                                <a href={data && data.Sitefacebooklink} target="_blank" className='flex justify-center items-center h-[30px] w-[30px] border border-sky-600 bg-sky-600 text-white hover:h-[35px] hover:w-[35px] transition-all duration-100 ease-linear rounded-full'>
                                     <i className="fa-brands fa-facebook-f"></i>
                                 </a>
-                                <a href="#" className='flex justify-center items-center h-[30px] w-[30px] border border-sky-600 bg-sky-600 text-white hover:h-[35px] hover:w-[35px] transition-all duration-100 ease-linear rounded-full'>
+                                <a href={data && data.Sitetwitterlink} target="_blank" className='flex justify-center items-center h-[30px] w-[30px] border border-sky-600 bg-sky-600 text-white hover:h-[35px] hover:w-[35px] transition-all duration-100 ease-linear rounded-full'>
                                     <i className="fa-brands fa-twitter"></i>
                                 </a>
-                                <a href="#" className='flex justify-center items-center h-[30px] w-[30px] border border-sky-600 bg-sky-600 text-white hover:h-[35px] hover:w-[35px] transition-all duration-100 ease-linear rounded-full'>
+                                <a href={data && data.Siteinstagram} target="_blank" className='flex justify-center items-center h-[30px] w-[30px] border border-sky-600 bg-sky-600 text-white hover:h-[35px] hover:w-[35px] transition-all duration-100 ease-linear rounded-full'>
                                     <i className="fa-brands fa-instagram"></i>
                                 </a>
-                                <a href="#" className='flex justify-center items-center h-[30px] w-[30px] border border-sky-600 bg-sky-600 text-white hover:h-[35px] hover:w-[35px] transition-all duration-100 ease-linear rounded-full'>
+                                <a href={data && data.Siteyoutubelink} target="_blank" className='flex justify-center items-center h-[30px] w-[30px] border border-sky-600 bg-sky-600 text-white hover:h-[35px] hover:w-[35px] transition-all duration-100 ease-linear rounded-full'>
                                     <i className="fa-brands fa-youtube"></i>
                                 </a>
                             </div>

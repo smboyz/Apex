@@ -14,7 +14,7 @@ import Vision from './pages/about/Vision';
 import ImageGallery from './pages/gallery/ImageGallery';
 import VideoGallery from './pages/gallery/VideoGallery';
 import AboutUs from './pages/about/AboutUs';
-import Objective from './pages/about/Objective'; 
+import Objective from './pages/about/Objective';
 import Blog from './pages/blog/Blog';
 import ServiceImages from './pages/home/ServiceImages';
 import BlogDetail from './pages/blog/BlogDetail';
@@ -24,21 +24,10 @@ import ResearchDevelopment from './pages/about/ResearchDevelopment';
 function App() {
   const animatedRef = useRef(false);
   useEffect(() => {
-    const handleResize = () => {
-      const windowWidth = window.innerWidth;
-      const disableValue = windowWidth <= 600 ? 0 : 600; // Change the threshold as needed
-      Aos.init({
-        disable: window.innerWidth <= 600 ? true : disableValue
-      });
-    };
     if (!animatedRef.current) {
-      handleResize(); // Initial setup
+      Aos.init();
       animatedRef.current = true;
     }
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
   }, []);
   return (
     <>

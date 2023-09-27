@@ -94,7 +94,7 @@ const Contact = () => {
                 <div className="container flex flex-col items-center">
                     <h2 className="lg:text-4xl sm:text-3xl text-2xl font-semibold mb-8 relative after:absolute after:w-[80%] after:content-[''] after:h-[4px] after:bg-sky-700 after:bottom-[-8px] after:left-[10%] after:rounded-md before:absolute before:w-[4px] before:h-[4px] before:bg-white before:content-[''] before:z-10 before:bottom-[-8px] custom-animation" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true" >{cont.caption}</h2>
                     <div className='lg:w-2/3 w-full shadow-[0_0_10px_3px_rgba(0,0,0,0.1)] rounded-lg p-4 flex flex-col items-center' data-aos="fade-up" data-aos-duration="1000" data-aos-once="true" >
-                        <h3 className='sm:text-2xl text-xl font-semibold mb-4'>Enquriy Us</h3>
+                        <h3 className='sm:text-2xl text-xl font-semibold mb-4'>{cont.title}</h3>
                         {successMessage && (
                             <div className="success-message" style={{ color: "green" }}>
                                 {successMessage}
