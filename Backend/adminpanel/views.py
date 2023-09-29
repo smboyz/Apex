@@ -359,5 +359,4 @@ def delete_nav(request, pk):
         return redirect('main_navigation', parent_id=parent_id)
     else:
         return redirect('main_navigation')
-    
-    # return render(request, 'delete.html', {'obj': obj})
+
