@@ -73,7 +73,7 @@ const Features = () => {
                             <NavLink to={`/Features/${dataItem.id}`} className="item flex flex-col gap-2 items-center mx-2 border border-gray-400 bg-white bg-opacity-10 p-2 rounded-md custom-height" key={index} data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
                                 <i className={`${dataItem.icon_image} text-2xl`}></i>
                                 <h3 className='lg:text-2xl text-xl text-sky-600 lg:font-bold font-semibold text-center'>{dataItem.title}</h3>
-                                <p className='text-sm text-center' dangerouslySetInnerHTML={{ __html: dataItem.short_desc }}></p>
+                                <p className='text-sm text-center' dangerouslySetInnerHTML={{ __html: dataItem.short_desc.substring(0, 200) }}></p>
                             </NavLink>
                         ))}
                     </OwlCarousel>
