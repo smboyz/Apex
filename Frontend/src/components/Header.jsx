@@ -48,18 +48,18 @@ const Header = () => {
         headerData();
     }, [parentId]);
     // console.log(data);
-    console.log(navigation);
+    // console.log(navigation);
 
     useEffect(() => {
         const determineActiveBlock = () => {
             const path = location.pathname;
-            if (path === "/") {
+            if (path === "/" || path.startsWith("/Features/")) {
                 return 0;
             }
             else if (path.startsWith("/AboutUs") || path.startsWith("/Mission") || path.startsWith("/Vision") || path.startsWith("/Objective") || path.startsWith("/OurStrength") || path.startsWith("/ResearchDevelopment")) {
                 return 1;
             }
-            else if (path.startsWith("/ServiceImages")) {
+            else if (path.startsWith("/ServiceCity")) {
                 return 2;
             }
             else if (path === "/ImageGallery" || path === "/VideoGallery") {

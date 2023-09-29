@@ -4,6 +4,7 @@ import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import FeatureData from './FeatureData';
 import axios from 'axios';
+import { NavLink } from 'react-router-dom';
 
 const Features = () => {
     const featureData = FeatureData;
@@ -69,11 +70,11 @@ const Features = () => {
                 <div className='h-full w-full'>
                     <OwlCarousel className="owl-theme" {...options}>
                         {features_1 && features_1.map((dataItem, index) => (
-                            <div className="item flex flex-col gap-2 items-center mx-2 border border-gray-400 bg-white bg-opacity-10 p-2 rounded-md custom-height" key={index} data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
+                            <NavLink to={`/Features/${dataItem.id}`} className="item flex flex-col gap-2 items-center mx-2 border border-gray-400 bg-white bg-opacity-10 p-2 rounded-md custom-height" key={index} data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
                                 <i className={`${dataItem.icon_image} text-2xl`}></i>
                                 <h3 className='lg:text-2xl text-xl text-sky-600 lg:font-bold font-semibold text-center'>{dataItem.title}</h3>
                                 <p className='text-sm text-center' dangerouslySetInnerHTML={{ __html: dataItem.short_desc }}></p>
-                            </div>
+                            </NavLink>
                         ))}
                     </OwlCarousel>
                 </div>

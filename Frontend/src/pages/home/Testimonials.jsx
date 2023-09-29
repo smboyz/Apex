@@ -63,12 +63,12 @@ const Testimonials = () => {
         // Axios GET request to fetch data
         TestimonialData();
     }, []);
-    console.log(test)
+    // console.log(test)
 
     return (
         <section className='py-10'>
             <div className="container flex flex-col items-center" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
-                <h2 className="lg:text-4xl sm:text-3xl text-2xl font-semibold mb-8 relative after:absolute after:w-[80%] after:content-[''] after:h-[4px] after:bg-sky-700 after:bottom-[-8px] after:left-[10%] after:rounded-md before:absolute before:w-[4px] before:h-[4px] before:bg-white before:content-[''] before:z-10 before:bottom-[-8px] custom-animation">{test.length > 0 ?  test[0].caption : ''}</h2>
+                <h2 className="lg:text-4xl sm:text-3xl text-2xl font-semibold mb-8 relative after:absolute after:w-[80%] after:content-[''] after:h-[4px] after:bg-sky-700 after:bottom-[-8px] after:left-[10%] after:rounded-md before:absolute before:w-[4px] before:h-[4px] before:bg-white before:content-[''] before:z-10 before:bottom-[-8px] custom-animation">{test.length > 0 ? test[0].caption : ''}</h2>
                 <div className='w-full'>
                     <Slider {...settings}>
                         {test.map((dataItem) => (

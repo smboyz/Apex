@@ -30,14 +30,14 @@
                     <tr>
                       <th>
                         <!-- "Select All" checkbox -->
-                        <input type="checkbox" id="select-all">
+                        <input type="checkbox" id="select-all" class="ml-2">
                       </th>
                       <th>Select All</th>
                     </tr>
                     <table class="table align-items-center mb-0">
                       <thead>
                         <tr>
-                          <th></th>
+                          <th>Select</th>
                           <th>S.N</th>
                           <th>Name</th>
                           <th>Mobile No</th>
@@ -127,7 +127,10 @@
       deleteButton.addEventListener("click", function () {
         const selectedItems = document.querySelectorAll('input[name="selected_items[]"]:checked');
         if (selectedItems.length > 0) {
+          const confirmed = confirm("Are you sure you want to delete the selected items?")
+          if(confirmed){
           document.getElementById("deleteForm").submit();
+          }
         } else {
           alert("Please select items to delete.");
         }

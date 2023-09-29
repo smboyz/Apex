@@ -17,9 +17,12 @@ import AboutUs from './pages/about/AboutUs';
 import Objective from './pages/about/Objective';
 import Blog from './pages/blog/Blog';
 import ServiceImages from './pages/home/ServiceImages';
+import FeatureDetails from './pages/home/FeatureDetails';
+import WhyUsDetail from './pages/about/WhyUsDetail';
 import BlogDetail from './pages/blog/BlogDetail';
 import OurStrength from './pages/about/OurStrength';
 import ResearchDevelopment from './pages/about/ResearchDevelopment';
+import ServiceCity from './pages/home/ServiceCity';
 
 function App() {
   const animatedRef = useRef(false);
@@ -35,7 +38,10 @@ function App() {
         <Header />
         <Routes>
           <Route exact path='/' Component={Homepage} />
-          <Route exact path='/ServiceImages/:adTitle' Component={ServiceImages} />
+          <Route exact path='/ServiceCity/:adTitle' Component={ServiceCity} />
+          <Route exact path='/ServiceCity/:adTitle/:district' Component={ServiceImages} />
+          <Route exact path='/Features/:id' Component={FeatureDetails} />
+          <Route exact path='/AboutUs/:id' Component={WhyUsDetail} />
           <Route exact path='/AboutUs' Component={AboutUs} />
           <Route exact path='/Mission' Component={Mission} />
           <Route exact path='/Vision' Component={Vision} />

@@ -19,7 +19,7 @@ const Footer = () => {
         // Axios GET request to fetch data
         headerData();
     }, []);
-    console.log(data);
+    // console.log(data);
 
     return (
         <footer className='bg-white text-black'>

@@ -8,7 +8,7 @@ urlpatterns = [
     path("logout/", Logoutpage, name="logout"),
     path("globalsetting/", globalsetting, name="globalsetting"),
     path("contactus/", contactus, name="contactus"),
-    path("delete_contact/", delete_contact, name="delete_contact"),
+    path("delete_contact", delete_contact, name="delete_contact"),
     path("main_navigation/<int:parent_id>/", main_navigation, name="main_navigation"),
     path("main_navigation/", main_navigation, name="main_navigation"),
     path("navigation/", navigation_list, name="navigation"),
@@ -16,5 +16,5 @@ urlpatterns = [
     path("update/<int:pk>/", update, name="update"),
     path("delete_nav/<int:pk>/", delete_nav, name="delete_nav"),
     path("comment/", comment, name="comment"),
-    path("delete_comment", delete_comment, name="delete_comment"),
+    path("delete_comment/", delete_comment, name="delete_comment"),
 ]

@@ -5,9 +5,9 @@ import ServiceData from './ServiceData';
 
 const ServiceImages = () => {
     const data = ServiceData;
-    const { adTitle } = useParams();
+    const { adTitle, district } = useParams();
 
-    const filteredImages = data.filter((image) => image.adTitle === adTitle);
+    const filteredImages = data.filter((image) => image.adTitle === adTitle && image.district === district);
 
     return (
         <>

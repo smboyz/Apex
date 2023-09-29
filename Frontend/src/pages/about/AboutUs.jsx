@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import WhyUsData from './WhyUsData';
 import axios from 'axios';
+import { NavLink } from 'react-router-dom';
 
 const AboutUs = () => {
     const data = WhyUsData;
@@ -61,16 +62,18 @@ const AboutUs = () => {
                     <div className='flex flex-wrap justify-center'>
                         {choose.map((dataItem) => (
                             <div key={dataItem.id} className='lg:w-1/3 md:w-1/2 w-full px-4' data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
-                                <div className='flex flex-col items-center gap-2 border border-gray-400 bg-white bg-opacity-10 mb-4 p-4 rounded-lg'>
-                                    <i className={`${dataItem.icon_image} text-3xl `}></i>
-                                    <h3 className='text-2xl font-semibold text-sky-600'>{dataItem.name}</h3>
-                                    <p className='md:text-base text-sm' dangerouslySetInnerHTML={{ __html: dataItem.short_desc }}></p>
-                                </div>
+                                <NavLink to={`/AboutUs/${dataItem.id}`} className="inline-block w-full h-full">
+                                    <div className='flex flex-col items-center gap-2 border border-gray-400 bg-white bg-opacity-10 mb-4 p-4 rounded-lg'>
+                                        <i className={`${dataItem.icon_image} text-3xl `}></i>
+                                        <h3 className='text-2xl font-semibold text-sky-600'>{dataItem.name}</h3>
+                                        <p className='md:text-base text-sm' dangerouslySetInnerHTML={{ __html: dataItem.short_desc }}></p>
+                                    </div>
+                                </NavLink>
                             </div>
                         ))}
                     </div>
                 </div>
-            </section>
+            </section >
         </>
     )
 }

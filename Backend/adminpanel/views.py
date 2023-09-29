@@ -162,7 +162,7 @@ def comment(request):
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
  
-    return render(request, "comment.html",{'con':con, 'glob' : glob, 'page_obj':page_obj})
+    return render(request, "Comment.html",{'con':con, 'glob' : glob, 'page_obj':page_obj})
 
 @login_required(login_url=settings.LOGIN_URL)
 def delete_comment(request):
@@ -177,13 +177,6 @@ def delete_comment(request):
                 con.delete()
 
     return redirect('comment')
-    # com = get_object_or_404(Comment, pk=pk)
-
-    # if request.method == "POST":
-    #     com.delete()
-    #     return redirect('comment')
-
-    # return redirect('comment')
 
 @login_required(login_url=settings.LOGIN_URL)
 def main_navigation(request, parent_id=None):
@@ -359,4 +352,5 @@ def delete_nav(request, pk):
         return redirect('main_navigation', parent_id=parent_id)
     else:
         return redirect('main_navigation')
-
+    
+    # return render(request, 'delete.html', {'obj': obj})
