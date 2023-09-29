@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from .models import GlobalSettings, ContactUS, Navigation, Comment
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from django.core.paginator import Paginator
 
 
 def admin_login(request):
@@ -117,34 +118,72 @@ def globalsetting(request):
 def contactus(request):
     glob = GlobalSettings.objects.all()
     con=ContactUS.objects.all()
+    
+
+    dels = ContactUS.objects.all()
+    dels = dels.order_by('-id')
+    paginator = Paginator(dels, 10)  # Show 6 contacts per page.
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
  
-    return render(request, "contactus.html",{'con':con, 'glob' : glob})
+    return render(request, "contactus.html",{'con':con, 'glob' : glob, 'page_obj':page_obj})
 
 @login_required(login_url=settings.LOGIN_URL)
-def delete_contact(request, pk):
-    con = get_object_or_404(ContactUS, pk=pk)
-
+def delete_contact(request):
     if request.method == "POST":
-        con.delete()
-        return redirect('contactus')
+        # Check if "selected_items" is in the POST data
+        selected_items = request.POST.getlist('selected_items[]')
+        
+        if selected_items:
+            # Loop through the selected items and delete them
+            for item_pk in selected_items:
+                con = get_object_or_404(ContactUS, pk=item_pk)
+                con.delete()
 
     return redirect('contactus')
+    # con = get_object_or_404(ContactUS, pk=pk)
+
+    # if request.method == "POST":
+    #     con.delete()
+    #     return redirect('contactus')
+
+    # return redirect('contactus')
 
 def comment(request):
     glob = GlobalSettings.objects.all()
-    com=Comment.objects.all()
+    con=Comment.objects.all()
+    
+
+    dels = Comment.objects.all()
+    dels = dels.order_by('-id')
+    paginator = Paginator(dels, 10)  # Show 6 contacts per page.
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
  
-    return render(request, "comment.html",{'com':com, 'glob' : glob})
+    return render(request, "comment.html",{'con':con, 'glob' : glob, 'page_obj':page_obj})
 
 @login_required(login_url=settings.LOGIN_URL)
-def delete_comment(request, pk):
-    com = get_object_or_404(Comment, pk=pk)
-
+def delete_comment(request):
     if request.method == "POST":
-        com.delete()
-        return redirect('comment')
+        # Check if "selected_items" is in the POST data
+        selected_items = request.POST.getlist('selected_items[]')
+        
+        if selected_items:
+            # Loop through the selected items and delete them
+            for item_pk in selected_items:
+                con = get_object_or_404(Comment, pk=item_pk)
+                con.delete()
 
     return redirect('comment')
+    # com = get_object_or_404(Comment, pk=pk)
+
+    # if request.method == "POST":
+    #     com.delete()
+    #     return redirect('comment')
+
+    # return redirect('comment')
 
 @login_required(login_url=settings.LOGIN_URL)
 def main_navigation(request, parent_id=None):
