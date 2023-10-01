@@ -61,7 +61,7 @@ const ServiceImageModal = (props) => {
                 </span>
                 <div className='flex justify-center items-center pt-3 h-full'>
                     <img
-                        src={currentImage.imageUrl}
+                        src={currentImage.bannerimage}
                         alt="Full Image"
                         className="lg:h-[400px] h-full lg:w-[50%] w-full object-cover"
                     />

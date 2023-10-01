@@ -38,8 +38,8 @@ function App() {
         <Header />
         <Routes>
           <Route exact path='/' Component={Homepage} />
-          <Route exact path='/ServiceCity/:adTitle' Component={ServiceCity} />
-          <Route exact path='/ServiceCity/:adTitle/:district' Component={ServiceImages} />
+          <Route exact path='/ServiceCity/:name' Component={ServiceCity} />
+          <Route exact path='/ServiceCity/:name/:caption' Component={ServiceImages} />
           <Route exact path='/Features/:id' Component={FeatureDetails} />
           <Route exact path='/AboutUs/:id' Component={WhyUsDetail} />
           <Route exact path='/AboutUs' Component={AboutUs} />
