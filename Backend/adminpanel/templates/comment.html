@@ -41,75 +41,76 @@
             <div class="container-fluid py-4">
               <div class="card-body px-0 pb-2">
                 <div class="table-responsive p-0">
-                  {% comment %} <form id="deleteForm" method="POST" action="{% url 'delete_comment' %}">
-                  {% csrf_token %} {% endcomment %}
-                  <tr>
-                    <th>
-                      <!-- "Select All" checkbox -->
-                      <input type="checkbox" id="select-all" class="ml-2">
-                    </th>
-                    <th>Select All</th>
-                  </tr>
-                  <table class="table align-items-center mb-0 hide" id="comment_table">
-                    <thead>
-                      <tr>
-                        <th>Select</th>
-                        <th>S.N</th>
-                        <th>Name</th>
-                        <th>Mobile No</th>
-                        <th>Email</th>
-                        <th>Message</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% for cons in page_obj %}
+                  <form id="deleteForm" method="POST" action="{% url 'delete_comment' %}">
+                    {% csrf_token %}
+                    <tr>
+                      <th>
+                        <!-- "Select All" checkbox -->
+                        <input type="checkbox" id="select-all" class="ml-2">
+                      </th>
+                      <th>Select All</th>
+                    </tr>
+                    <table class="table align-items-center mb-0 hide" id="comment_table">
+                      <thead>
                         <tr>
-                          <td>
-                            <input type="checkbox" name="selected_items[]" value="{{ cons.pk }}">
-                          </td>
-                          <td>{{ forloop.counter }}</td>
-                          <td>{{ cons.name }}</td>
-                          <td>{{ cons.mobileno }}</td>
-                          <td>{{ cons.email }}</td>
-                          <td>{{ cons.message }}</td>
+                          <th>Select</th>
+                          <th>S.N</th>
+                          <th>Name</th>
+                          <th>Mobile No</th>
+                          <th>Email</th>
+                          <th>Message</th>
                         </tr>
-                      {% endfor %}
-                    </tbody>
-                  </table>
-                  {% if results %}
-                    <table class="table align-items-center mb-0" id="search_comment">
-                      <tr>
-                        <th>Select</th>
-                        <th>S.N</th>
-                        <th>Name</th>
-                        <th>Mobile No</th>
-                        <th>Email</th>
-                        <th>Message</th>
-                      </tr>
-                      {% for cons in results %}
+                      </thead>
+                      <tbody>
+                        {% for cons in page_obj %}
+                          <tr>
+                            <td>
+                              <input type="checkbox" name="selected_items[]" value="{{ cons.pk }}">
+                            </td>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ cons.name }}</td>
+                            <td>{{ cons.mobileno }}</td>
+                            <td>{{ cons.email }}</td>
+                            <td>{{ cons.message }}</td>
+                          </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                    {% if results %}
+                      <table class="table align-items-center mb-0" id="search_comment">
                         <tr>
-                          <td>
-                            <input type="checkbox" name="selected_items[]" value="{{ cons.pk }}">
-                          </td>
-                          <td>{{ forloop.counter }}</td>
-                          <td>{{ cons.name }}</td>
-                          <td>{{ cons.mobileno }}</td>
-                          <td>{{ cons.email }}</td>
-                          <td>{{ cons.message }}</td>
+                          <th>Select</th>
+                          <th>S.N</th>
+                          <th>Name</th>
+                          <th>Mobile No</th>
+                          <th>Email</th>
+                          <th>Message</th>
                         </tr>
-                        {% comment %} <form method="POST" action="{% url 'delete' pk=cons.pk %}">
+                        {% for cons in results %}
+                          <tr>
+                            <td>
+                              <input type="checkbox" name="selected_items[]" value="{{ cons.pk }}">
+                            </td>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ cons.name }}</td>
+                            <td>{{ cons.mobileno }}</td>
+                            <td>{{ cons.email }}</td>
+                            <td>{{ cons.message }}</td>
+                          </tr>
+                          {% comment %} <form method="POST" action="{% url 'delete' pk=cons.pk %}">
                                 {% csrf_token %}
                                 <button type="button" class="btn-danger btn-sm deleteButton" onclick="myFunction(event)">&#128465;</button>
                                 <p class="confirmation-msg"></p>
-                        </form> {% endcomment %}
-                      {% endfor %}
-                    </table>
-                  {% endif %}
-                  <div>
-                    <button type="button" class="btn btn-danger btn-sm deleteButton">Delete</button>
+                          </form> {% endcomment %}
+                        {% endfor %}
+                      </table>
+                    {% endif %}
+                    <div>
+                      <button type="button" class="btn btn-danger btn-sm deleteButton">Delete</button>
+                    </div>
+                    {% comment %} </form> {% endcomment %}
                   </div>
-                  {% comment %} </form> {% endcomment %}
-                </div>
+                </form>
               </div>
             </div>
           </div>
