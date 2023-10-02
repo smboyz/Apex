@@ -7,6 +7,7 @@ from .models import GlobalSettings, ContactUS, Navigation, Comment
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.core.paginator import Paginator
+# from .models import Apply
 
 
 def admin_login(request):
@@ -118,6 +119,11 @@ def globalsetting(request):
 def contactus(request):
     glob = GlobalSettings.objects.all()
     con=ContactUS.objects.all()
+    query = request.GET.get('q')
+    results = None
+    
+    if query:
+        results = ContactUS.objects.filter(name__icontains=query)
     
 
     dels = ContactUS.objects.all()
@@ -127,7 +133,7 @@ def contactus(request):
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
  
-    return render(request, "contactus.html",{'con':con, 'glob' : glob, 'page_obj':page_obj})
+    return render(request, "contactus.html",{'con':con, 'glob' : glob, 'page_obj':page_obj,'results':results})
 
 @login_required(login_url=settings.LOGIN_URL)
 def delete_contact(request):
@@ -153,6 +159,11 @@ def delete_contact(request):
 def comment(request):
     glob = GlobalSettings.objects.all()
     con=Comment.objects.all()
+    query = request.GET.get('q')
+    results = None
+    
+    if query:
+        results = Comment.objects.filter(name__icontains=query)
     
 
     dels = Comment.objects.all()
@@ -162,7 +173,7 @@ def comment(request):
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
  
-    return render(request, "Comment.html",{'con':con, 'glob' : glob, 'page_obj':page_obj})
+    return render(request, "Comment.html",{'con':con, 'glob' : glob, 'page_obj':page_obj,'results':results})
 
 @login_required(login_url=settings.LOGIN_URL)
 def delete_comment(request):
@@ -181,13 +192,18 @@ def delete_comment(request):
 @login_required(login_url=settings.LOGIN_URL)
 def main_navigation(request, parent_id=None):
     glob=GlobalSettings.objects.all()
+    query = request.GET.get('q')
+    results = None
+    
+    if query:
+        results = Navigation.objects.filter(name__icontains=query)
         
     if parent_id:
         obj = Navigation.objects.filter(Parent=parent_id).order_by('position')
     else:
         obj = Navigation.objects.filter(Parent = None).order_by('position')
  
-    return render(request, "main_navigation.html", {'obj':obj, 'parent_id':parent_id,'glob':glob})
+    return render(request, "main_navigation.html", {'obj':obj, 'parent_id':parent_id,'glob':glob,'results':results})
 
 @login_required(login_url=settings.LOGIN_URL)
 def navigation_list(request, parent_id=None):
@@ -354,3 +370,15 @@ def delete_nav(request, pk):
         return redirect('main_navigation')
     
     # return render(request, 'delete.html', {'obj': obj})
+
+# def search_results(request):
+#     glob=GlobalSettings.objects.all()
+    
+#     query = request.GET.get('q')
+#     results = None
+
+#     if query:
+#         results = Apply.objects.filter(name__icontains=query)
+        
+    
+#     return render(request, 'search.html', {'results': results, 'query': query,'glob':glob})

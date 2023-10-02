@@ -2,6 +2,22 @@
 {% load static %}
 {% block content %}
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <div class="container">
+      <form action="{% url 'comment' %}"
+            method="GET"
+            class="my-2 d-flex justify-content-end">
+        <div class="input-group col-4">
+          <input type="text"
+                 name="q"
+                 class="form-control"
+                 placeholder="Search..."
+                 value="{{ request.GET.q }}">
+          <div class="input-group-append">
+            <button type="submit" class="btn btn-primary c-btn">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl"
          id="navbarBlur"
@@ -25,45 +41,74 @@
             <div class="container-fluid py-4">
               <div class="card-body px-0 pb-2">
                 <div class="table-responsive p-0">
-                  <form id="deleteForm" method="POST" action="{% url 'delete_comment' %}">
-                    {% csrf_token %}
-                    <tr>
-                      <th>
-                        <!-- "Select All" checkbox -->
-                        <input type="checkbox" id="select-all" class="ml-2">
-                      </th>
-                      <th>Select All</th>
-                    </tr>
-                    <table class="table align-items-center mb-0">
-                      <thead>
+                  {% comment %} <form id="deleteForm" method="POST" action="{% url 'delete_comment' %}">
+                  {% csrf_token %} {% endcomment %}
+                  <tr>
+                    <th>
+                      <!-- "Select All" checkbox -->
+                      <input type="checkbox" id="select-all" class="ml-2">
+                    </th>
+                    <th>Select All</th>
+                  </tr>
+                  <table class="table align-items-center mb-0 hide" id="comment_table">
+                    <thead>
+                      <tr>
+                        <th>Select</th>
+                        <th>S.N</th>
+                        <th>Name</th>
+                        <th>Mobile No</th>
+                        <th>Email</th>
+                        <th>Message</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for cons in page_obj %}
                         <tr>
-                          <th>Select</th>
-                          <th>S.N</th>
-                          <th>Name</th>
-                          <th>Mobile No</th>
-                          <th>Email</th>
-                          <th>Message</th>
+                          <td>
+                            <input type="checkbox" name="selected_items[]" value="{{ cons.pk }}">
+                          </td>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ cons.name }}</td>
+                          <td>{{ cons.mobileno }}</td>
+                          <td>{{ cons.email }}</td>
+                          <td>{{ cons.message }}</td>
                         </tr>
-                      </thead>
-                      <tbody>
-                        {% for cons in page_obj %}
-                          <tr>
-                            <td>
-                              <input type="checkbox" name="selected_items[]" value="{{ cons.pk }}">
-                            </td>
-                            <td>{{ forloop.counter }}</td>
-                            <td>{{ cons.name }}</td>
-                            <td>{{ cons.mobileno }}</td>
-                            <td>{{ cons.email }}</td>
-                            <td>{{ cons.message }}</td>
-                          </tr>
-                        {% endfor %}
-                      </tbody>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                  {% if results %}
+                    <table class="table align-items-center mb-0" id="search_comment">
+                      <tr>
+                        <th>Select</th>
+                        <th>S.N</th>
+                        <th>Name</th>
+                        <th>Mobile No</th>
+                        <th>Email</th>
+                        <th>Message</th>
+                      </tr>
+                      {% for cons in results %}
+                        <tr>
+                          <td>
+                            <input type="checkbox" name="selected_items[]" value="{{ cons.pk }}">
+                          </td>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ cons.name }}</td>
+                          <td>{{ cons.mobileno }}</td>
+                          <td>{{ cons.email }}</td>
+                          <td>{{ cons.message }}</td>
+                        </tr>
+                        {% comment %} <form method="POST" action="{% url 'delete' pk=cons.pk %}">
+                                {% csrf_token %}
+                                <button type="button" class="btn-danger btn-sm deleteButton" onclick="myFunction(event)">&#128465;</button>
+                                <p class="confirmation-msg"></p>
+                        </form> {% endcomment %}
+                      {% endfor %}
                     </table>
-                    <div>
-                      <button type="button" class="btn btn-danger btn-sm deleteButton">Delete</button>
-                    </div>
-                  </form>
+                  {% endif %}
+                  <div>
+                    <button type="button" class="btn btn-danger btn-sm deleteButton">Delete</button>
+                  </div>
+                  {% comment %} </form> {% endcomment %}
                 </div>
               </div>
             </div>
@@ -134,6 +179,17 @@
         }
       });
     });
+  </script>
+  <script>
+      // JavaScript to toggle table visibility
+      var commentTable = document.getElementById("comment_table");
+      var searchCommentTable = document.getElementById("search_comment");
+
+      // Check if searchContactTable has rows, and hide contactTable if it does
+      if (searchCommentTable && searchCommentTable.rows.length > 1) {
+      commentTable.style.display = "none";
+      }
+      
   </script>
   <style>
     .deleteButton {
