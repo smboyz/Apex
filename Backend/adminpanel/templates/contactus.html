@@ -91,6 +91,9 @@
                       </tr>
                       {% for cons in results %}
                         <tr>
+                          <td>
+                            <input type="checkbox" name="selected_items[]" value="{{ cons.pk }}">
+                          </td>
                           <td>{{ forloop.counter }}</td>
                           <td>{{ cons.name }}</td>
                           <td>{{ cons.mobileno }}</td>
