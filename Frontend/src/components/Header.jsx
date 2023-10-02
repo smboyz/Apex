@@ -146,7 +146,7 @@ const Header = () => {
                                                     <NavLink onClick={closeSidebar} to="/Contact" className="block w-full">{nav.name}</NavLink>
                                                 </li>
                                             )}
-                                            {nav.id === 48 && (
+                                            {nav.id === 48 && (s
                                                 <li onClick={() => handleButtonClick(5)} className={`md:w-auto w-full md:hover:text-sky-600 ${activeBlock === 5 ? 'md:text-sky-600' : ''}`}>
                                                     <NavLink onClick={closeSidebar} to="/Blog" className="block w-full">{nav.name}</NavLink>
                                                 </li>

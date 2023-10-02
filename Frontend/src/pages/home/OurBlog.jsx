@@ -6,6 +6,8 @@ import axios from 'axios';
 
 const OurBlog = () => {
   const [blogs_1, setBlogs_1] = useState([]);
+  const [parentId, setParentId] = useState(null);
+  const [navigation, setNavigation] = useState([]);
 
   const BlogsData = async () => {
     try {
@@ -20,6 +22,23 @@ const OurBlog = () => {
         setBlogs_1(blogs_1Data); // Assuming you want to slice the filtered data
       }
 
+      const navigationResponse = await axios.get(
+        "http://127.0.0.1:8000/api/navigations/",
+        {
+          params: {
+            parent_id: parentId,      // Set the parentId as a parameter
+            page_type: "Group",       // Filter by page_type        
+          }
+        }
+      );
+
+      if (navigationResponse.data) {
+        const navigationData = navigationResponse.data.filter(
+          (item) => item.status === "Publish"
+        );
+        setNavigation(navigationData);
+      }
+
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -28,7 +47,7 @@ const OurBlog = () => {
   useEffect(() => {
     // Axios GET request to fetch data
     BlogsData();
-  }, []);
+  }, [parentId]);
 
   return (
     <section className='py-10'>
@@ -40,7 +59,9 @@ const OurBlog = () => {
           ))
           }
         </div>
-        <NavLink to="/Blog" className='flex items-center gap-2 text-sm py-3 px-4 rounded bg-sky-600 bottom-10 right-2 text-white border border-sky-600 transition-all duration-200 ease-linear hover:bg-white hover:text-black mt-5'>View All<i className="fa-solid fa-arrow-right"></i></NavLink>
+        {navigation[navigation?.findIndex(item => item?.id === 48)] && (
+          <NavLink to="/Blog" className='flex items-center gap-2 text-sm py-3 px-4 rounded bg-sky-600 bottom-10 right-2 text-white border border-sky-600 transition-all duration-200 ease-linear hover:bg-white hover:text-black mt-5'>View All<i className="fa-solid fa-arrow-right"></i></NavLink>
+        )}
       </div>
     </section>
   )
