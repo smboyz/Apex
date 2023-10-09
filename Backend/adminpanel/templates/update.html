@@ -255,10 +255,12 @@
                                                                             {% if data.page_type == "Blog_1" %}selected="selected"{% endif %}>
                                                                         Blog_1
                                                                     </option>
-                                                                    <option value="Services_1" {% if data.page_type == "Services_1" %}selected="selected"{% endif %}>
+                                                                    <option value="Services_1"
+                                                                            {% if data.page_type == "Services_1" %}selected="selected"{% endif %}>
                                                                         Services_1
                                                                     </option>
-                                                                    <option value="Client" {% if data.page_type == "Client" %}selected="selected"{% endif %}>
+                                                                    <option value="Client"
+                                                                            {% if data.page_type == "Client" %}selected="selected"{% endif %}>
                                                                         Client
                                                                     </option>
                                                                     {% comment %} <option value="UNSKILLED" {% if data.page_type == "UNSKILLED" %}selected="selected"{% endif %}>
