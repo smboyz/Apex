@@ -54,6 +54,7 @@ class Navigation(models.Model):
         ('Objectives','Objectives'),('Our Strength','Our Strength'),('Research & Development','Research & Development'),
         ('Video_Gallery', 'Video_Gallery'),('Gallery', 'Gallery'),('Image_Gallery', 'Image_Gallery'),
         ('Contact', 'Contact'),('Group', 'Group'),('Video', 'Video'),('Blog_1','Blog_1'),('Services_1', 'Services_1'),
+        ('Client', 'Client'),
     )
 
     STATUS = (

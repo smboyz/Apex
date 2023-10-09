@@ -79,7 +79,7 @@ const Contact = () => {
         // Axios GET request to fetch data
         ContactsData();
     }, []);
-    console.log(data)
+    // console.log(data)
 
     return (
         <>

@@ -1,15 +1,19 @@
 .owl-theme .owl-stage-outer {
   height: 100%;
 }
+
 .owl-theme .owl-stage-outer .owl-stage {
   height: 100%;
 }
+
 .owl-theme .owl-stage-outer .owl-stage .owl-item {
   height: 100%;
 }
+
 .owl-theme .owl-stage-outer .owl-stage .owl-item .item {
   height: 100%;
 }
+
 .owl-theme .owl-stage-outer .owl-stage .owl-item .item img {
   width: 100%;
   height: 100%;
@@ -19,6 +23,7 @@
 .custom-flex {
   display: flex !important;
 }
+
 .center .slick-center {
   position: relative;
   z-index: 10;
@@ -34,30 +39,46 @@
 .custom-animation::before {
   animation: left-to-right 8s linear infinite;
 }
-.custom-height{
+
+.custom-height {
   height: 220px !important;
 }
+
 @keyframes left-to-right {
   0% {
     left: 12%;
   }
+
   50% {
     left: 86%;
   }
+
   100% {
     left: 12%;
   }
 }
+
 @media screen and (max-width: 1000px) {
   .center .slick-center {
     box-shadow: none;
   }
+
   .center .slick-slide:not(.slick-center) {
     border: 1px solid rgba(0, 0, 0, 0.071);
   }
 }
+
 @media screen and (max-width: 699px) {
-  .custom-height{
+  .custom-height {
     height: 170px !important;
   }
+}
+
+.clients-image {
+  height: 70px !important;
+}
+
+.clients-image img {
+  width: 80% !important;
+  object-fit: contain !important;
 }

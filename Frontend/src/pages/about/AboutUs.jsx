@@ -63,7 +63,7 @@ const AboutUs = () => {
                         {choose.map((dataItem) => (
                             <div key={dataItem.id} className='lg:w-1/3 md:w-1/2 w-full px-4' data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
                                 <NavLink to={`/AboutUs/${dataItem.id}`} className="inline-block w-full h-full">
-                                    <div className='flex flex-col items-center gap-2 border border-gray-400 bg-white bg-opacity-10 mb-4 p-4 rounded-lg'>
+                                    <div className="flex flex-col items-center gap-2 border border-gray-400 bg-white bg-opacity-10 mb-4 p-4 rounded-lg relative after:absolute after:w-full after:h-full after:rounded-lg after:inset-0 after:content-['Read_More'] after:bg-black after:text-white after:underline after:flex after:justify-center after:items-center after:opacity-0 hover:after:opacity-100 hover:after:bg-opacity-60">
                                         <i className={`${dataItem.icon_image} text-3xl `}></i>
                                         <h3 className='text-2xl font-semibold text-sky-600'>{dataItem.name}</h3>
                                         <p className='md:text-base text-sm' dangerouslySetInnerHTML={{ __html: dataItem.short_desc }}></p>
